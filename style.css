@@ -507,6 +507,58 @@ body {
   margin: 0;
 }
 
+/* Scoped styling for the centered "Dive Deeper" h2/button (does not affect other pages) */
+.divelogo {
+  /* neutralize any inline h2 font-size so the heading doesn't create big gaps */
+  font-size: initial !important;
+  text-align: center;
+  margin: var(--spacing-md) 0;
+}
+
+.divelogo button {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+  color: #fff;
+  font-weight: 800;
+  font-family: inherit;
+  font-size: clamp(1rem, 2.6vw, 1.4rem);
+  padding: 0.6rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms, filter 120ms;
+  line-height: 1;
+}
+
+/* Hover / focus states to match site standards */
+.divelogo button:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.18);
+  filter: brightness(1.03);
+}
+
+.divelogo button:active {
+  transform: translateY(-2px) scale(.997);
+}
+
+.divelogo button:focus-visible {
+  outline: 3px solid rgba(0,159,227,0.16);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+/* Make sure the button scales nicely on very small screens */
+@media (max-width: 420px) {
+  .divelogo button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+  }
+}
+
 /* Responsive tweaks */
 @media (min-width: 980px) {
   /* On wide screens allow a two-column feel while keeping the brand centered above */
@@ -530,4 +582,47 @@ body {
   .footer-container { padding: 22px 12px; }
   .footer-logo .brand { font-size: 1.15rem; }
   .footer-column { min-width: 140px; }
+}
+
+/* Scoped styling for the tactical board image */
+.tboardpic {
+  display: block;
+  width: min(980px, 96%); /* keep image proportional and not too wide */
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 12px;
+  border: 6px solid #ffffff; /* subtle frame */
+  box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+  object-fit: cover;
+  filter: saturate(1.04) contrast(1.03);
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, filter .2s;
+  will-change: transform, box-shadow;
+}
+
+/* lift/zoom on hover/focus for emphasis (accessible via keyboard) */
+.tboardpic:hover,
+.tboardpic:focus {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.56);
+  filter: saturate(1.08) contrast(1.06) brightness(1.02);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Slightly smaller frame on narrow screens */
+@media (max-width: 600px) {
+  .tboardpic {
+    width: 100%;
+    border-radius: 8px;
+    border-width: 4px;
+    margin: 14px auto;
+  }
+}
+
+/* Optional: if image sits inside a wrapper and you want it centered with padding */
+.tboardpic-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 8px 12px;
 }
