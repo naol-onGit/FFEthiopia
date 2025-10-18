@@ -25,6 +25,9 @@ body {
   line-height: 1.6;
   color: var(--dark-text);
   background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -63,27 +66,27 @@ body {
 .menulogo {
   width: 100px;
   height: auto;
+  display: block;
 }
 
 .nav-links {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: nowrap;
+  margin-left: auto;
 }
 
-#menu-bar a {
-  color: var(--white);
+.nav-links a {
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
   font-size: 15px;
   transition: color 0.3s ease, transform 0.2s ease;
-  padding: 4px 10px;
-  border-radius: 4px;
-  line-height: 1;
+  padding: 8px 0;
 }
 
-#menu-bar a:hover,
-#menu-bar a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary-yellow);
   transform: translateY(-1px);
 }
@@ -365,198 +368,191 @@ body {
   transform: translateY(-6px);
 }
 
-/* Footer: black background with yellow accent, well aligned */
+/* Page layout: make footer stick to bottom and content centered */
+html, body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--dark-text, #222);
+  background-color: var(--white, #fff);
+}
+
+/* Let main grow so footer stays at bottom on short pages */
+main, .site-main, .content-wrapper {
+  flex: 1 0 auto;
+}
+
+/* Constrain page content and center it like other pages */
+.contact-page {
+  max-width: 1000px;
+  margin: 28px auto;
+  padding: 28px 20px;
+  box-sizing: border-box;
+}
+
+/* Navigation (ensure same look as other pages) */
+#menu-bar {
+  background: var(--primary-blue, #009fe3);
+  color: #fff;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+#menu-bar .nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.menulogo { height: 48px; width: auto; display: block; }
+.nav-links { margin-left: auto; display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: #fff; text-decoration: none; font-weight: 600; padding: 8px 0; }
+.nav-links a.active, .nav-links a:hover { color: var(--primary-yellow, #ffcc00); }
+
+/* Headings and intro */
+.contact-page h1 {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  color: #111;
+  font-weight: 800;
+}
+.contact-page .intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--light-text, #555);
+  margin-bottom: 24px;
+}
+
+/* Sections layout */
+.contact-info, .social-links, .comment-form {
+  margin-bottom: 28px;
+  background: transparent;
+}
+.contact-info .info-block {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.Icon { font-size: 28px; color: var(--primary-blue, #009fe3); }
+
+/* Phone link */
+.contact-info a[href^="tel"] {
+  color: var(--primary-blue, #009fe3);
+  text-decoration: underline;
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+/* Social icons row */
+.social-links h2, .contact-info h2, .comment-form h2 {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  color: #111;
+}
+.social-icons {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.0);
+  color: var(--primary-blue, #009fe3);
+  text-decoration: none;
+  font-size: 20px;
+  transition: transform .12s ease, background .12s ease, color .12s ease;
+}
+.social-icons a:hover {
+  transform: translateY(-3px);
+  color: #fff;
+  background: var(--primary-blue, #009fe3);
+}
+
+/* Feedback form iframe container */
+.form-container {
+  margin-top: 12px;
+}
+.form-container iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  background: #fff;
+  display: block;
+}
+
+/* Footer: span full viewport width, center inner content */
 .site-footer {
+  width: 100%;
   background: #0b0b0b;
   color: #e9e9e9;
-  font-size: 0.95rem;
-  margin-top: var(--spacing-lg);
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
-
-/* thin yellow stripe on top */
-.footer-top-stripe {
-  height: 6px;
-  background: linear-gradient(90deg, var(--primary-yellow) 0%, #ffd84d 50%, var(--primary-yellow) 100%);
+.site-footer .footer-top-stripe {
+  width: 100%;
+  height: 8px;
+  background: var(--primary-yellow, #ffcc00);
 }
-
-/* Adjust footer proportions and center brand (logo removed) */
-.footer-container {
-  max-width: 1000px;      /* a bit narrower for proportion */
+.site-footer > .footer-container,
+.site-footer .footer-container {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+.site-footer .footer-content {
+  max-width: 1000px;
   margin: 0 auto;
   padding: 32px 20px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
 }
-
-/* stack and center footer content for a proportional layout */
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* hide any logo image if still present */
-.footer-logo img {
-  display: none !important;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-/* Brand centered, bold, large and yellow */
-.footer-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0;
-}
-
 .footer-logo .brand {
-  color: var(--primary-yellow);
-  font-weight: 900;
-  font-size: clamp(1.25rem, 2.6vw, 1.9rem); /* responsive large text */
-  margin: 0;
-  letter-spacing: 0.2px;
-}
-
-/* Center and make link columns flow nicely under the brand */
-.footer-links {
-  display: flex;
-  gap: 28px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-/* columns: allow them to shrink on small screens */
-.footer-column {
-  min-width: 180px;
-  max-width: 320px;
-}
-
-/* keep headings and links readable on centered layout */
-.footer-column h4 {
-  color: var(--primary-yellow);
-  margin-bottom: 8px;
-  font-size: 1.02rem;
   font-weight: 800;
+  color: var(--primary-yellow, #ffcc00);
   text-align: center;
+  font-size: 1.4rem;
 }
-.footer-column nav { display: flex; flex-direction: column; gap: 8px; align-items: center; }
-
-/* Footer links — always visible button style (no appear/disappear) */
-.footer-column nav {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  padding: 10px 0; /* keep good hit area */
-}
-
-.footer-column nav a {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 10px;
-  background: var(--primary-yellow);
-  color: #0b0b0b;
-  font-weight: 700;
+.footer-links h4 { color: var(--primary-yellow, #ffcc00); margin-bottom: 12px; }
+.footer-links nav a {
+  display: block;
+  color: #e9e9e9;
+  padding: 10px 0;
   text-decoration: none;
-  opacity: 1;             /* always visible */
-  transform: none;        /* no translate/scale hiding */
-  transition: transform .16s ease, box-shadow .16s ease, background .15s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-weight: 600;
 }
-
-/* Hover / active visual feedback */
-.footer-column nav a:hover,
-.footer-column nav a:active {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 36px rgba(255,204,0,0.12);
-  background: linear-gradient(90deg, rgba(255,204,0,0.22), rgba(255,204,0,0.1));
-  color: #0b0b0b;
-}
-
-/* Keep keyboard focus visible */
-.footer-column nav a:focus,
-.footer-column nav a:focus-visible {
-  outline: 3px solid rgba(255,204,0,0.18);
-  outline-offset: 4px;
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-/* Remove/override the old "reveal on hover" selectors so they don't hide links */
-.footer-links:hover .footer-column nav a,
-.footer-column nav:hover a {
-  /* intentionally empty — handled above; this overrides previous reveal rules */
-}
-
-/* footer bottom */
 .footer-bottom {
-  margin-top: 18px;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  padding-top: 12px;
+  width: 100%;
+  padding: 12px 20px;
   text-align: center;
-}
-.footer-bottom p {
-  color: #cfcfcf;
-  font-size: 0.9rem;
-  margin: 0;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  background: rgba(0,0,0,0.05);
 }
 
-/* Scoped styling for the centered "Dive Deeper" h2/button (does not affect other pages) */
-.divelogo {
-  /* neutralize any inline h2 font-size so the heading doesn't create big gaps */
-  font-size: initial !important;
-  text-align: center;
-  margin: var(--spacing-md) 0;
-}
-
-.divelogo button {
-  -webkit-appearance: none;
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  display: inline-block;
-  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--light-blue) 100%);
-  color: #fff;
-  font-weight: 800;
-  font-family: inherit;
-  font-size: clamp(1rem, 2.6vw, 1.4rem);
-  padding: 0.6rem 1.25rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
-  transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms, filter 120ms;
-  line-height: 1;
-}
-
-/* Hover / focus states to match site standards */
-.divelogo button:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 22px 48px rgba(0,0,0,0.18);
-  filter: brightness(1.03);
-}
-
-.divelogo button:active {
-  transform: translateY(-2px) scale(.997);
-}
-
-.divelogo button:focus-visible {
-  outline: 3px solid rgba(0,159,227,0.16);
-  outline-offset: 4px;
-  border-radius: 10px;
-}
-
-/* Make sure the button scales nicely on very small screens */
-@media (max-width: 420px) {
-  .divelogo button {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-  }
+/* Small screens: stack sections and footer columns */
+@media (max-width: 820px) {
+  .nav-links { gap: 18px; }
+  .contact-page { padding: 20px; margin: 20px auto; }
+  .site-footer .footer-content { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+  .footer-links nav a { display: inline-block; margin: 6px 8px; }
+  .social-icons { justify-content: flex-start; }
 }
 
 /* Responsive tweaks */
